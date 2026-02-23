@@ -4,14 +4,31 @@ from praktikum.bun import Bun
 
 
 @pytest.mark.parametrize(
-    'name, price',
+    'name',
     [
-        ('black bun', 100.0),
-        ('white bun', 200.5),
+        'black bun',
+        'булочка',
+        'bun-123',
+        'bun!@#$',
     ],
 )
-def test_bun_getters_return_init_values(name, price):
-    bun = Bun(name, price)
+def test_get_name_returns_init_value(name):
+    bun = Bun(name, 100.0)
 
     assert bun.get_name() == name
+
+
+@pytest.mark.parametrize(
+    'price',
+    [
+        0,
+        1,
+        200.5,
+        1_000_000.0,
+        -10.5,
+    ],
+)
+def test_get_price_returns_init_value(price):
+    bun = Bun('black bun', price)
+
     assert bun.get_price() == price
